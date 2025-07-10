@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gradient-purple: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-blue: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-green: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Custom radial gradient utilities */
+.bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Theme support for particles and gradients */
+@layer base {
+  :root {
+    --gradient-color: #8350e8;
+    --sparkles-color: #8350e8;
+    --foreground: theme('colors.slate.900');
+    --background: theme('colors.white');
+  }
+
+  .dark {
+    --gradient-color: #8350e8;
+    --sparkles-color: #ffffff;
+    --foreground: theme('colors.white');
+    --background: theme('colors.slate.900');
+  }
+}
