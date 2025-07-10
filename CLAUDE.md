@@ -53,7 +53,12 @@ npm run lint
 
 ### Components
 - `src/components/ui/sparkles.jsx` - shadcn/ui Sparkles component with density, color theming, and masking support
-- `src/main.jsx` - React app entry point
+- `src/components/ThemeProvider.jsx` - Theme provider wrapper using next-themes
+- `src/components/ThemeToggle.jsx` - Dark/light theme toggle button component
+- `src/components/TrustedCompanies.jsx` - Trusted companies section with logos and particle effects
+- `src/components/logos/` - SVG logo components (Retool, Vercel, Remote, Arc, Raycast)
+- `src/hooks/useTheme.jsx` - Custom hook for theme management with hydration safety
+- `src/main.jsx` - React app entry point with ThemeProvider wrapper
 - `src/index.css` - Global styles and Tailwind imports
 
 ## Key Technologies
@@ -62,6 +67,7 @@ npm run lint
 - **Vite** for fast development and building
 - **Tailwind CSS** with custom design system and Outfit font family
 - **Framer Motion** for smooth animations and transitions
+- **next-themes** for dark/light theme management with system preference support
 - **shadcn/ui** component system with custom Sparkles component for particle effects
 - **Heroicons** for consistent iconography
 - **Express.js** backend with CORS support
@@ -79,7 +85,8 @@ The project includes two API implementations:
 Both use identical Resend email functionality and validation logic.
 
 ### Frontend Architecture
-- **Single Component Design**: Entire landing page contained in `App.jsx` for simplicity
+- **Component-Based Design**: Main App component with modular sub-components for reusability
+- **Theme System**: Dark/light theme support with next-themes, system preference detection, and hydration safety
 - **State Management**: Local React state for form data, errors, and UI states
 - **Animation System**: Framer Motion for entrance animations, hover effects, and page transitions
 - **Particle System**: shadcn/ui Sparkles component with configurable density, color theming, and masking effects
@@ -127,10 +134,11 @@ This will install the component to `src/components/ui/sparkles.jsx` with support
 - **Smooth animations** with Framer Motion for all interactions
 
 ### Color Palette
-- **Backgrounds**: `slate-50`, `white`, `slate-100` with gradients
+- **Light Theme**: `slate-50`, `white`, `slate-100` backgrounds with `slate-800` text
+- **Dark Theme**: `gray-900`, `gray-950`, `slate-800` backgrounds with `white` text
 - **Text**: `slate-800` (primary), `slate-600` (secondary), `slate-400` (muted)
-- **Accents**: `blue-600`/`blue-700` for primary actions
-- **Borders**: `slate-200` with 50% opacity variations
+- **Accents**: `blue-600`/`blue-700` for primary actions, `indigo-900`/`indigo-200` for themed elements
+- **Borders**: `slate-200` with 50% opacity variations, `white/20` for dark theme
 
 ### Typography
 - **Font Family**: Outfit (Google Fonts)
@@ -141,12 +149,14 @@ This will install the component to `src/components/ui/sparkles.jsx` with support
 
 ### React Patterns
 - **Functional Components**: All components use hooks (useState, useEffect)
+- **Theme Management**: Custom useTheme hook with hydration safety and system preference detection
 - **Form Handling**: Controlled inputs with validation and error states
 - **Animation Patterns**: Consistent Framer Motion usage for entrance and interaction animations
 
 ### Styling Patterns
 - **Tailwind Utility Classes**: Extensive use following design system guidelines
 - **Responsive Design**: Mobile-first approach with `sm:`, `md:`, `lg:` breakpoints
+- **Theme-Aware Styling**: `dark:` prefix for dark theme variants (e.g., `dark:bg-gray-900`)
 - **Glassmorphism**: `bg-white/80 backdrop-blur-sm` pattern throughout
 - **Shadows**: `shadow-xl shadow-slate-200/50` for depth
 
@@ -160,6 +170,25 @@ transition={{ duration: 0.8 }}
 // Button interactions
 whileHover={{ scale: 1.02 }}
 whileTap={{ scale: 0.98 }}
+```
+
+### Theme Patterns
+```jsx
+// Theme-aware styling
+import { useTheme } from '../hooks/useTheme'
+
+const { theme } = useTheme()
+
+// Dynamic theme-based properties
+<Sparkles
+  color={theme === "dark" ? "#ffffff" : "#000000"}
+/>
+
+// Theme toggle component
+<ThemeToggle />
+
+// Theme-aware CSS classes
+<div className="bg-white dark:bg-gray-900 text-slate-800 dark:text-white">
 ```
 
 ### Sparkles Component Patterns
