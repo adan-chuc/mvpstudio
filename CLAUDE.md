@@ -74,6 +74,7 @@ npm run lint
 - **Resend** for transactional email delivery
 - **canvas-confetti** for celebration animations
 - **concurrently** for running frontend and backend simultaneously
+- **@tsparticles/react** and **@tsparticles/slim** for additional particle effects (complementing Sparkles component)
 
 ## Architecture
 
@@ -174,7 +175,7 @@ whileTap={{ scale: 0.98 }}
 
 ### Theme Patterns
 ```jsx
-// Theme-aware styling
+// Theme-aware styling with hydration safety
 import { useTheme } from '../hooks/useTheme'
 
 const { theme } = useTheme()
@@ -190,6 +191,13 @@ const { theme } = useTheme()
 // Theme-aware CSS classes
 <div className="bg-white dark:bg-gray-900 text-slate-800 dark:text-white">
 ```
+
+#### Theme System Implementation
+The theme system uses `next-themes` with a custom hook for hydration safety:
+- **ThemeProvider**: Wraps app with `next-themes` provider, enables system preference detection
+- **useTheme hook**: Custom wrapper that prevents hydration mismatches by checking mounted state
+- **ThemeToggle**: Button component that cycles between light/dark/system themes
+- **CSS Classes**: Uses Tailwind's `dark:` prefix for theme-aware styling
 
 ### Sparkles Component Patterns
 ```jsx
@@ -242,9 +250,12 @@ import { Sparkles } from "@/components/ui/sparkles"
 - Both HTML and plain text email templates are generated
 
 ### Debugging
-- **Server logs**: Detailed console logging in Express server
-- **Client errors**: Browser console for frontend issues
-- **Email debugging**: Check Resend dashboard for delivery status
+- **Server logs**: Detailed console logging in Express server (check terminal running `npm run server`)
+- **Client errors**: Browser console for frontend issues, React DevTools for component state
+- **Email debugging**: Check Resend dashboard for delivery status and bounce reports
+- **Theme issues**: Check if `mounted` state is causing hydration problems in useTheme hook
+- **Form validation**: Use browser DevTools Network tab to inspect API requests/responses
+- **Animation problems**: Check Framer Motion DevTools and verify CSS transitions
 
 ## Common Development Tasks
 

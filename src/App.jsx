@@ -4,6 +4,12 @@ import confetti from 'canvas-confetti'
 import { Sparkles } from './components/ui/sparkles'
 import { ThemeToggle } from './components/ThemeToggle'
 import { Retool, Vercel, Remote, Arc, Raycast } from './components/logos'
+import CounterAnimation from './components/CounterAnimation'
+import InteractiveCard from './components/InteractiveCard'
+import TechStackShowcase from './components/TechStackShowcase'
+import CostCalculator from './components/CostCalculator'
+import ProcessTimeline from './components/ProcessTimeline'
+import LiveMetrics from './components/LiveMetrics'
 import { 
   CurrencyDollarIcon, 
   ClockIcon, 
@@ -47,17 +53,38 @@ function App() {
     {
       icon: CurrencyDollarIcon,
       title: "Ahorro Garantizado",
-      description: "Hasta 200,000 pesos menos que un desarrollo tradicional"
+      description: "Hasta 200,000 pesos menos que un desarrollo tradicional",
+      highlight: "Ahorro promedio del 75%",
+      expandedContent: "Nuestro proceso optimizado y metodología ágil nos permite entregar MVPs funcionales por una fracción del costo tradicional. Eliminamos elementos innecesarios y nos enfocamos en las funcionalidades core que realmente importan.",
+      testimonial: {
+        quote: "Ahorramos más de $180,000 comparado con otras cotizaciones. El ROI fue inmediato.",
+        author: "Carlos Mendez",
+        role: "CEO, TechStart"
+      }
     },
     {
       icon: ClockIcon,
       title: "Tiempo Reducido",
-      description: "Lanza tu MVP en 4-6 semanas, no meses"
+      description: "Lanza tu MVP en 4-6 semanas, no meses",
+      highlight: "85% más rápido que métodos tradicionales",
+      expandedContent: "Mientras otros tardan 6-12 meses, nosotros entregamos MVPs funcionales en semanas. Usamos frameworks modernos, componentes pre-construidos y un equipo especializado en desarrollo rápido.",
+      testimonial: {
+        quote: "En 5 semanas teníamos nuestro MVP funcionando con usuarios reales. Increíble velocidad.",
+        author: "Ana Torres",
+        role: "Fundadora, EcoApp"
+      }
     },
     {
       icon: ShieldCheckIcon,
       title: "Riesgo Minimizado",
-      description: "Valida tu idea antes de invertir en desarrollo completo"
+      description: "Valida tu idea antes de invertir en desarrollo completo",
+      highlight: "95% de nuestros MVPs validan la hipótesis",
+      expandedContent: "Un MVP te permite probar tu idea con usuarios reales antes de comprometer grandes presupuestos. Identificamos problemas temprano y ajustamos la estrategia basada en feedback real del mercado.",
+      testimonial: {
+        quote: "Descubrimos que nuestros usuarios querían algo diferente. El MVP nos ahorró meses de desarrollo incorrecto.",
+        author: "Roberto Silva",
+        role: "CTO, InnovateLab"
+      }
     }
   ]
 
@@ -73,19 +100,37 @@ function App() {
       icon: CreditCardIcon,
       title: "Pagos por Entregables",
       description: "No pagas todo de contado. Pagas conforme avanza el proyecto y ves resultados reales",
-      highlight: "Sin riesgo financiero inicial"
+      highlight: "Sin riesgo financiero inicial",
+      expandedContent: "Dividimos el proyecto en hitos específicos. Solo pagas cuando cada entregable está completado y aprobado por ti. Esto te da control total sobre el presupuesto y asegura calidad en cada fase.",
+      testimonial: {
+        quote: "El modelo de pagos por entregables nos dio mucha tranquilidad. Veíamos progreso real antes de cada pago.",
+        author: "María González",
+        role: "COO, StartupLab"
+      }
     },
     {
       icon: CodeBracketIcon,
       title: "Eres Dueño del Código",
       description: "100% código limpio que te entregamos. Tu MVP, tu código, tu decisión de qué hacer con él",
-      highlight: "Propiedad completa e independencia"
+      highlight: "Propiedad completa e independencia",
+      expandedContent: "Todo el código fuente, documentación y assets son 100% tuyos. Sin dependencias a terceros, sin licencias restrictivas. Puedes modificarlo, escalarlo o cambiar de proveedor cuando quieras.",
+      testimonial: {
+        quote: "Tener el código completo nos permitió escalar rápidamente cuando conseguimos inversión. Total independencia.",
+        author: "Jorge Ramirez",
+        role: "CTO, TechVenture"
+      }
     },
     {
       icon: ClockIcon,
       title: "Semanas, No Meses",
       description: "Tu MVP funcional en producción lo más rápido posible. Porque el tiempo de validación es oro",
-      highlight: "Velocidad de lanzamiento real"
+      highlight: "Velocidad de lanzamiento real",
+      expandedContent: "Usamos metodologías ágiles, frameworks probados y nuestro stack tecnológico optimizado para entregar MVPs funcionales en tiempo récord. Cada día cuenta en el mercado.",
+      testimonial: {
+        quote: "En 28 días teníamos usuarios reales usando nuestro producto. Esa velocidad nos dio ventaja competitiva crucial.",
+        author: "Andrea López",
+        role: "Fundadora, InnovaApp"
+      }
     }
   ]
 
@@ -96,7 +141,7 @@ function App() {
   }
 
   const validatePhone = (phone) => {
-    const phoneRegex = /^[\+]?[\d\s\-\(\)]{10,}$/
+    const phoneRegex = /^[+]?[\d\s-()]{10,}$/
     return phoneRegex.test(phone)
   }
 
@@ -246,7 +291,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen relative font-outfit overflow-hidden">
+    <div className="min-h-screen relative font-outfit overflow-hidden scroll-smooth">
       {/* Modern Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5"></div>
@@ -550,15 +595,42 @@ function App() {
         </div>
       </section>
 
-      {/* Benefits Section with Perfect Symmetrical Gradient */}
+      {/* Enhanced Benefits Section with Interactive Elements */}
       <section className="relative pt-0 pb-8 px-4 sm:px-6 lg:px-8">
-        {/* Perfect symmetrical vertical gradient: white → color → white */}
+        {/* Subtle Notion/Apple style gradient */}
         <div 
           className="absolute inset-0" 
           style={{
-            background: 'linear-gradient(to bottom, #f8fafc 0%, #f1f5f9 15%, #e8e5f6 30%, #e2e8f0 50%, #e8e5f6 70%, #f8fafc 85%, white 100%)'
+            background: 'linear-gradient(to bottom, #fafafa 0%, #f5f5f5 50%, #fafafa 100%)'
           }}
         ></div>
+        
+        {/* Minimal geometric elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            animate={{
+              opacity: [0.03, 0.06, 0.03],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute top-1/4 left-1/3 w-96 h-96 bg-slate-300 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{
+              opacity: [0.02, 0.05, 0.02],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 4
+            }}
+            className="absolute bottom-1/4 right-1/3 w-80 h-80 bg-slate-200 rounded-full blur-3xl"
+          />
+        </div>
         
         <div className="relative z-10 max-w-7xl mx-auto pt-12">
           <motion.div
@@ -568,51 +640,175 @@ function App() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">
+            <h2 className="text-4xl sm:text-5xl font-light text-slate-900 mb-6 tracking-tight">
               ¿Por qué elegir un MVP?
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="text-xl font-normal text-slate-500 max-w-3xl mx-auto mb-12 leading-relaxed">
               Valida tu idea de negocio sin arriesgar todo tu capital
             </p>
+            
+            {/* Key metrics with Notion/Apple style */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-2xl mx-auto">
+              <div className="text-center group">
+                <div className="bg-white/60 backdrop-blur-xl rounded-2xl border border-slate-100/50 p-6 hover:bg-white/80 transition-all duration-500 shadow-sm hover:shadow-lg min-h-[120px] flex flex-col justify-center">
+                  <CounterAnimation
+                    end={200000}
+                    prefix="$"
+                    suffix=""
+                    className="text-3xl font-light text-slate-900 block mb-2"
+                    duration={2.5}
+                  />
+                  <p className="text-sm font-normal text-slate-500">Costo promedio tradicional</p>
+                </div>
+              </div>
+              <div className="text-center group">
+                <div className="bg-white/60 backdrop-blur-xl rounded-2xl border border-slate-100/50 p-6 hover:bg-white/80 transition-all duration-500 shadow-sm hover:shadow-lg min-h-[120px] flex flex-col justify-center">
+                  <CounterAnimation
+                    end={50}
+                    suffix="%"
+                    className="text-3xl font-light text-emerald-600 block mb-2"
+                    duration={2.5}
+                  />
+                  <p className="text-sm font-normal text-slate-500">Menos costo con MVP</p>
+                </div>
+              </div>
+              <div className="text-center group">
+                <div className="bg-white/60 backdrop-blur-xl rounded-2xl border border-slate-100/50 p-6 hover:bg-white/80 transition-all duration-500 shadow-sm hover:shadow-lg min-h-[120px] flex flex-col justify-center">
+                  <div className="mb-2">
+                    <span className="text-3xl font-light text-blue-600">4-6</span>
+                    <span className="text-lg font-light text-slate-400 ml-1">semanas</span>
+                  </div>
+                  <p className="text-sm font-normal text-slate-500">Tiempo de entrega</p>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
+          {/* Interactive Cards Grid */}
           <div className="grid md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon
-              return (
-                <motion.div
-                  key={benefit.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300 group"
-                >
-                  <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-200 transition-colors duration-300">
-                    <Icon className="h-6 w-6 text-blue-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-slate-800 mb-3">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-slate-600">
-                    {benefit.description}
-                  </p>
-                </motion.div>
-              )
-            })}
+            {benefits.map((benefit, index) => (
+              <InteractiveCard
+                key={benefit.title}
+                icon={benefit.icon}
+                title={benefit.title}
+                description={benefit.description}
+                highlight={benefit.highlight}
+                expandedContent={benefit.expandedContent}
+                testimonial={benefit.testimonial}
+                index={index}
+              />
+            ))}
           </div>
+
+          {/* Progress indicators with real data */}
+          <motion.div
+            className="mt-16 max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-white/60 backdrop-blur-xl rounded-2xl p-10 border border-slate-100/50 shadow-sm">
+              <h3 className="text-2xl font-light text-slate-900 mb-8 text-center tracking-tight">
+                Comparación Visual de Ahorros
+              </h3>
+              
+              <div className="space-y-8">
+                {/* Traditional Development */}
+                <div>
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-sm font-normal text-slate-600">Desarrollo Tradicional</span>
+                    <span className="text-sm font-normal text-slate-800">$400,000 - 8 meses</span>
+                  </div>
+                  <div className="w-full bg-slate-100 rounded-full h-2">
+                    <motion.div
+                      className="bg-slate-400 h-2 rounded-full"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "100%" }}
+                      transition={{ duration: 2, delay: 0.5 }}
+                      viewport={{ once: true }}
+                    />
+                  </div>
+                </div>
+
+                {/* MVP Development */}
+                <div>
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-sm font-normal text-slate-600">MVP con Nosotros</span>
+                    <span className="text-sm font-normal text-slate-800">$100,000 - 4-6 semanas</span>
+                  </div>
+                  <div className="w-full bg-slate-100 rounded-full h-2">
+                    <motion.div
+                      className="bg-emerald-400 h-2 rounded-full"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: "25%" }}
+                      transition={{ duration: 2, delay: 1 }}
+                      viewport={{ once: true }}
+                    />
+                  </div>
+                </div>
+
+                {/* Savings */}
+                <div className="bg-slate-50/80 rounded-xl p-6 border border-slate-100">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-normal text-slate-600">Tu Ahorro Total</span>
+                    <CounterAnimation
+                      end={300000}
+                      prefix="$"
+                      suffix=" + 7 meses"
+                      className="text-lg font-light text-slate-900"
+                      duration={2}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Working Benefits Section - Notion/Apple Style */}
+      {/* Premium Working Benefits Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
-        {/* Gradient that starts white, transitions to purple tones, then prepares for the fourth section */}
+        {/* Enhanced gradient with depth */}
         <div 
           className="absolute inset-0" 
           style={{
             background: 'linear-gradient(to bottom, white 0%, #faf9fc 8%, #f3f1f8 20%, #ebe8f4 35%, #e2dff0 50%, #ebe8f4 65%, #f3f1f8 80%, #f8f9fa 92%, rgba(248, 250, 252, 0.5) 100%)'
           }}
         ></div>
+        
+        {/* Animated code elements in background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-20 right-20 text-4xl opacity-10"
+            animate={{
+              y: [0, -20, 0],
+              rotate: [0, 5, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            {'</>'}
+          </motion.div>
+          <motion.div
+            className="absolute bottom-32 left-16 text-3xl opacity-10"
+            animate={{
+              y: [0, 15, 0],
+              rotate: [0, -5, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+          >
+            {'{...}'}
+          </motion.div>
+        </div>
         
         <div className="relative z-10 max-w-7xl mx-auto">
           <motion.div
@@ -625,78 +821,184 @@ function App() {
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">
               ¿Qué incluye trabajar con nosotros?
             </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
               Una forma inteligente de desarrollar tu MVP sin los riesgos tradicionales
             </p>
+            
+            {/* Live metrics showcase */}
+            <LiveMetrics className="mb-12" />
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {workingBenefits.map((benefit, index) => {
-              const Icon = benefit.icon
-              return (
-                <motion.div
-                  key={benefit.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.15 }}
-                  viewport={{ once: true }}
-                  className="group"
-                >
-                  <div className="bg-white/70 backdrop-blur-lg rounded-3xl p-8 border border-slate-200/50 shadow-lg shadow-slate-200/30 hover:shadow-xl hover:shadow-slate-200/40 transition-all duration-500 h-full flex flex-col">
-                    {/* Icon */}
-                    <div className="mb-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <Icon className="h-8 w-8 text-white" />
-                      </div>
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="flex-1 flex flex-col">
-                      <h3 className="text-xl font-semibold text-slate-800 mb-3 leading-tight">
-                        {benefit.title}
-                      </h3>
-                      
-                      <p className="text-slate-600 mb-4 leading-relaxed flex-1">
-                        {benefit.description}
-                      </p>
-                      
-                      <div className="mt-auto">
-                        <div className="inline-flex items-center px-3 py-1.5 bg-blue-50 text-blue-700 text-sm font-medium rounded-full">
-                          <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
-                          {benefit.highlight}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              )
-            })}
+          {/* Interactive Cards with Premium Features */}
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+            {workingBenefits.map((benefit, index) => (
+              <InteractiveCard
+                key={benefit.title}
+                icon={benefit.icon}
+                title={benefit.title}
+                description={benefit.description}
+                highlight={benefit.highlight}
+                expandedContent={benefit.expandedContent}
+                testimonial={benefit.testimonial}
+                index={index}
+              />
+            ))}
           </div>
+
+          {/* Tech Stack Showcase */}
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <TechStackShowcase />
+          </motion.div>
+
+          {/* Enterprise Level Guarantees */}
+          <motion.div
+            className="bg-gradient-to-br from-slate-50 to-white rounded-3xl p-8 border border-slate-200/50 shadow-xl"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-bold text-slate-800 mb-8 text-center">
+              Garantías de Nivel Empresarial
+            </h3>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <motion.div
+                className="text-center p-4"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🛡️</span>
+                </div>
+                <h4 className="font-semibold text-slate-800 mb-2">
+                  <CounterAnimation
+                    end={100}
+                    suffix="% Garantía"
+                    className="text-green-600 font-bold"
+                    duration={1.5}
+                  />
+                </h4>
+                <p className="text-sm text-slate-600">Satisfacción o reembolso</p>
+              </motion.div>
+
+              <motion.div
+                className="text-center p-4"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">📋</span>
+                </div>
+                <h4 className="font-semibold text-slate-800 mb-2">
+                  <CounterAnimation
+                    end={30}
+                    suffix=" días"
+                    className="text-blue-600 font-bold"
+                    duration={1.5}
+                  />
+                </h4>
+                <p className="text-sm text-slate-600">Soporte post-lanzamiento</p>
+              </motion.div>
+
+              <motion.div
+                className="text-center p-4"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🔒</span>
+                </div>
+                <h4 className="font-semibold text-slate-800 mb-2">
+                  <span className="text-purple-600 font-bold">NDA Total</span>
+                </h4>
+                <p className="text-sm text-slate-600">Confidencialidad garantizada</p>
+              </motion.div>
+
+              <motion.div
+                className="text-center p-4"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">⚡</span>
+                </div>
+                <h4 className="font-semibold text-slate-800 mb-2">
+                  <CounterAnimation
+                    end={24}
+                    suffix="/7 Monitoreo"
+                    className="text-orange-600 font-bold"
+                    duration={1.5}
+                  />
+                </h4>
+                <p className="text-sm text-slate-600">Infraestructura siempre activa</p>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Advanced Interactive Features Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
-        {/* Gradient overlay to blend with previous section */}
+        {/* Enhanced gradient background */}
         <div 
-          className="absolute inset-0 bg-slate-50/50"
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to bottom, rgba(248, 250, 252, 0.5) 0%, #f1f5f9 20%, #e2e8f0 50%, #f8fafc 80%, white 100%)'
+          }}
         ></div>
         
+        {/* Subtle animated patterns */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.1, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute top-40 left-1/3 w-96 h-96 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full blur-3xl"
+          />
+        </div>
+        
         <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-6">
+              Todo lo que necesitas para validar tu idea
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
+              Nuestro proceso está diseñado para crear un producto mínimo viable 
+              que te permita probar tu concepto en el mercado real.
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
+            {/* Enhanced Features List with Interactive Elements */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
+              className="space-y-6"
             >
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-6">
-                Todo lo que necesitas para validar tu idea
-              </h2>
-              <p className="text-lg text-slate-600 mb-8">
-                Nuestro proceso está diseñado para crear un producto mínimo viable 
-                que te permita probar tu concepto en el mercado real.
-              </p>
+              <h3 className="text-2xl font-semibold text-slate-800 mb-6">
+                Funcionalidades Incluidas
+              </h3>
               
               <div className="space-y-4">
                 {features.map((feature, index) => (
@@ -706,53 +1008,213 @@ function App() {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="flex items-center"
+                    className="group flex items-center p-4 bg-white/70 backdrop-blur-sm rounded-xl border border-slate-200/50 hover:shadow-lg transition-all duration-300"
+                    whileHover={{ x: 10, scale: 1.02 }}
                   >
-                    <CheckCircleIcon className="h-5 w-5 text-blue-600 mr-3 flex-shrink-0" />
-                    <span className="text-slate-700">{feature}</span>
+                    <motion.div
+                      className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 group-hover:bg-green-200 transition-colors duration-300"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <CheckCircleIcon className="h-5 w-5 text-green-600" />
+                    </motion.div>
+                    <span className="text-slate-700 group-hover:text-slate-800 transition-colors duration-300">
+                      {feature}
+                    </span>
                   </motion.div>
                 ))}
               </div>
+              
+              {/* Process Timeline Integration */}
+              <motion.div
+                className="mt-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <ProcessTimeline />
+              </motion.div>
             </motion.div>
 
+            {/* Interactive Cost Calculator */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 border border-slate-200/50 shadow-xl shadow-slate-200/50"
             >
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-slate-800 mb-4">
-                  Comparación de Costos
-                </h3>
-                <div className="space-y-6">
-                  <div className="bg-red-50 border border-red-200 rounded-xl p-4">
-                    <p className="text-sm text-red-600 font-medium">Desarrollo Tradicional</p>
-                    <p className="text-3xl font-bold text-red-700">$300,000 - $500,000</p>
-                    <p className="text-sm text-red-600">6-12 meses</p>
-                  </div>
-                  
-                  <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-                    <p className="text-sm text-blue-600 font-medium">MVP con Nosotros</p>
-                    <p className="text-3xl font-bold text-blue-700">$50,000 - $100,000</p>
-                    <p className="text-sm text-blue-600">4-6 semanas</p>
-                  </div>
-                  
-                  <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-                    <p className="text-sm text-green-600 font-medium">Tu Ahorro</p>
-                    <p className="text-3xl font-bold text-green-700">Hasta $200,000</p>
-                    <p className="text-sm text-green-600">Y 4-8 meses de tiempo</p>
-                  </div>
-                </div>
-              </div>
+              <CostCalculator />
             </motion.div>
           </div>
+
+          {/* Portfolio Showcase Section */}
+          <motion.div
+            className="mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-bold text-slate-800 mb-8 text-center">
+              Casos de Éxito Recientes
+            </h3>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  name: "EcoApp",
+                  industry: "Sustentabilidad",
+                  timeline: "5 semanas",
+                  users: "2.5K",
+                  revenue: "$45K",
+                  color: "green"
+                },
+                {
+                  name: "FinanceAI",
+                  industry: "Fintech",
+                  timeline: "6 semanas",
+                  users: "1.8K",
+                  revenue: "$72K",
+                  color: "blue"
+                },
+                {
+                  name: "HealthTrack",
+                  industry: "Healthcare",
+                  timeline: "4 semanas",
+                  users: "3.2K",
+                  revenue: "$38K",
+                  color: "purple"
+                }
+              ].map((project) => (
+                <motion.div
+                  key={project.name}
+                  className="bg-white/80 backdrop-blur-sm rounded-xl p-6 border border-slate-200/50 shadow-lg"
+                  whileHover={{ 
+                    y: -5,
+                    scale: 1.02,
+                    boxShadow: "0 20px 40px -12px rgba(0, 0, 0, 0.15)"
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-lg font-semibold text-slate-800">{project.name}</h4>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium bg-${project.color}-100 text-${project.color}-700`}>
+                      {project.industry}
+                    </span>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-slate-600">Tiempo:</span>
+                      <span className="text-sm font-medium text-slate-800">{project.timeline}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-slate-600">Usuarios:</span>
+                      <CounterAnimation
+                        end={parseFloat(project.users.replace('K', '')) * 1000}
+                        suffix=""
+                        className="text-sm font-medium text-blue-600"
+                        duration={1.5}
+                        formatNumber={false}
+                      />
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm text-slate-600">Revenue/mes:</span>
+                      <CounterAnimation
+                        end={parseFloat(project.revenue.replace('$', '').replace('K', '')) * 1000}
+                        prefix="$"
+                        className="text-sm font-medium text-green-600"
+                        duration={1.5}
+                        formatNumber={false}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4 pt-4 border-t border-slate-200/50">
+                    <div className="flex items-center justify-between text-xs text-slate-500">
+                      <span>Estado: Activo</span>
+                      <motion.div
+                        className={`w-2 h-2 bg-${project.color}-400 rounded-full`}
+                        animate={{ 
+                          scale: [1, 1.5, 1],
+                          opacity: [1, 0.5, 1]
+                        }}
+                        transition={{ 
+                          duration: 2,
+                          repeat: Infinity
+                        }}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Call to Action with Enhanced Interactivity */}
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 border border-blue-200 shadow-xl">
+              <h3 className="text-2xl font-bold text-slate-800 mb-4">
+                ¿Listo para construir tu MVP?
+              </h3>
+              <p className="text-slate-600 mb-6 max-w-lg mx-auto">
+                Únete a más de 120 empresas que han validado sus ideas con nosotros
+              </p>
+              
+              <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-6">
+                <div className="text-center">
+                  <CounterAnimation
+                    end={120}
+                    suffix="+"
+                    className="text-xl font-bold text-blue-600"
+                    duration={2}
+                  />
+                  <p className="text-xs text-slate-600">Proyectos</p>
+                </div>
+                <div className="text-center">
+                  <CounterAnimation
+                    end={98}
+                    suffix="%"
+                    className="text-xl font-bold text-green-600"
+                    duration={2}
+                  />
+                  <p className="text-xs text-slate-600">Satisfacción</p>
+                </div>
+                <div className="text-center">
+                  <CounterAnimation
+                    end={4.2}
+                    suffix=" sem"
+                    className="text-xl font-bold text-purple-600"
+                    duration={2}
+                  />
+                  <p className="text-xs text-slate-600">Promedio</p>
+                </div>
+              </div>
+              
+              <motion.button
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-8 rounded-xl transition-all duration-200 shadow-lg shadow-blue-600/25 hover:shadow-blue-700/30"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })
+                }}
+              >
+                Comenzar Mi MVP Ahora
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Contact Form Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50/30">
+      <section id="contacto" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50/30">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

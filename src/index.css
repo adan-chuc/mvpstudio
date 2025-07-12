@@ -30,3 +30,99 @@
     --background: theme('colors.slate.900');
   }
 }
+
+/* Performance and Accessibility Optimizations */
+@layer utilities {
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* High contrast support */
+  @media (prefers-contrast: high) {
+    .bg-white\/70, .bg-white\/80 {
+      background-color: rgb(255 255 255 / 0.95);
+    }
+    
+    .border-slate-200\/50 {
+      border-color: rgb(226 232 240 / 0.8);
+    }
+  }
+
+  /* Mobile-specific optimizations */
+  @media (max-width: 768px) {
+    /* Reduce complexity of animations on mobile */
+    .blur-3xl {
+      filter: blur(20px);
+    }
+    
+    .backdrop-blur-sm {
+      backdrop-filter: blur(2px);
+    }
+    
+    .backdrop-blur-lg {
+      backdrop-filter: blur(4px);
+    }
+
+    /* Optimize spacing for mobile */
+    .grid-cols-2 {
+      gap: 1rem;
+    }
+    
+    .grid-cols-3 {
+      gap: 0.75rem;
+    }
+  }
+
+  /* Touch-friendly interactions */
+  @media (hover: none) and (pointer: coarse) {
+    .hover\:scale-105:hover {
+      transform: scale(1.02);
+    }
+    
+    .hover\:shadow-xl:hover {
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    }
+  }
+
+  /* Focus improvements for keyboard navigation */
+  .focus-visible\:ring-offset-2:focus-visible {
+    ring-offset-width: 2px;
+  }
+  
+  .focus-visible\:ring-2:focus-visible {
+    ring-width: 2px;
+  }
+  
+  .focus-visible\:ring-blue-500:focus-visible {
+    ring-color: rgb(59 130 246);
+  }
+
+  /* Performance optimizations */
+  .will-change-transform {
+    will-change: transform;
+  }
+  
+  .will-change-opacity {
+    will-change: opacity;
+  }
+  
+  .will-change-auto {
+    will-change: auto;
+  }
+
+  /* Scroll behavior */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-smooth {
+      scroll-behavior: auto;
+    }
+  }
+}
