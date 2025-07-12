@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import confetti from 'canvas-confetti'
 import { Sparkles } from './components/ui/sparkles'
+import { ChatWidget } from './components/ui/ai-chat-input'
 import { ThemeToggle } from './components/ThemeToggle'
 import { Retool, Vercel, Remote, Arc, Raycast } from './components/logos'
 import { 
@@ -30,6 +31,7 @@ function App() {
   const [formErrors, setFormErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
+  
 
   // Trigger confetti after modal appears
   useEffect(() => {
@@ -96,7 +98,7 @@ function App() {
   }
 
   const validatePhone = (phone) => {
-    const phoneRegex = /^[\+]?[\d\s\-\(\)]{10,}$/
+    const phoneRegex = /^[+]?[\d\s\-()]{10,}$/
     return phoneRegex.test(phone)
   }
 
@@ -194,6 +196,20 @@ function App() {
       phone: '',
       projectDescription: ''
     })
+  }
+
+  // Chat handlers
+  const handleChatSubmit = (message) => {
+    console.log('Mensaje recibido:', message)
+    // Aquí puedes agregar la lógica para manejar el mensaje
+    // Por ejemplo, enviar a un backend o integrar con un chatbot
+  }
+
+  const handleSuggestionClick = (question) => {
+    console.log('Pregunta sugerida seleccionada:', question)
+    // Aquí puedes manejar la pregunta sugerida
+    // Por ejemplo, auto-enviarla o mostrar una respuesta predefinida
+    handleChatSubmit(question)
   }
 
   // Smooth spectacular confetti explosion from center
@@ -934,6 +950,23 @@ function App() {
         </div>
       </section>
       </div>
+
+      {/* Chat Widget */}
+      <motion.div
+        initial={{ opacity: 0, y: 30, scale: 0.9 }}
+        animate={{ 
+          opacity: 1, 
+          y: 0, 
+          scale: 1,
+        }}
+        transition={{ delay: 1.2, duration: 0.6, type: "spring", stiffness: 150 }}
+        className="fixed bottom-8 right-6 z-50"
+      >
+        <ChatWidget 
+          onSubmit={handleChatSubmit} 
+          onSuggestionClick={handleSuggestionClick}
+        />
+      </motion.div>
 
       {/* Success Modal */}
       {showSuccessModal && (

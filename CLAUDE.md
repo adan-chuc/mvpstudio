@@ -34,6 +34,8 @@ npm run preview
 
 # Lint code
 npm run lint
+
+# Note: No test framework is currently configured
 ```
 
 ## Project Structure
@@ -133,12 +135,14 @@ This will install the component to `src/components/ui/sparkles.jsx` with support
 - **Consistent spacing** using Tailwind's spacing scale
 - **Smooth animations** with Framer Motion for all interactions
 
-### Color Palette
+### Color Palette & Theme Support
 - **Light Theme**: `slate-50`, `white`, `slate-100` backgrounds with `slate-800` text
-- **Dark Theme**: `gray-900`, `gray-950`, `slate-800` backgrounds with `white` text
+- **Dark Theme**: `gray-900`, `gray-950`, `slate-800` backgrounds with `white` text  
+- **Theme Management**: Uses `next-themes` with `useTheme` hook for seamless light/dark switching
 - **Text**: `slate-800` (primary), `slate-600` (secondary), `slate-400` (muted)
 - **Accents**: `blue-600`/`blue-700` for primary actions, `indigo-900`/`indigo-200` for themed elements
 - **Borders**: `slate-200` with 50% opacity variations, `white/20` for dark theme
+- **Design System**: Comprehensive design system documented in `design-system.md` with Spanish documentation
 
 ### Typography
 - **Font Family**: Outfit (Google Fonts)
@@ -264,12 +268,17 @@ import { Sparkles } from "@/components/ui/sparkles"
 2. Test performance with multiple animations
 3. Ensure accessibility considerations for reduced motion
 
-## Testing and Quality
+## Quality Assurance
 
 ### Linting
-- **ESLint configuration**: Modern config with React hooks and refresh plugins
-- **Rules**: Unused variables allowed for constants (varsIgnorePattern)
+- **ESLint configuration**: Modern config with React hooks and refresh plugins  
 - **Commands**: Use `npm run lint` to check code quality
+- **Rules**: Unused variables allowed for constants (varsIgnorePattern)
+
+### Testing
+- **No test framework configured**: Currently no unit or integration tests
+- **Manual testing**: Test contact form functionality with valid `.env.local` setup
+- **Email testing**: Use Resend dashboard to verify email delivery
 
 ### Building
 - **Production build**: `npm run build` creates optimized bundle
