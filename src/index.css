@@ -14,6 +14,21 @@
   background-image: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
+/* Hide scrollbar utility */
+@layer utilities {
+  .scrollbar-hide {
+    /* Firefox */
+    scrollbar-width: none;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    /* Chrome, Safari and Opera */
+    display: none;
+  }
+}
+
 /* Theme support for particles and gradients */
 @layer base {
   :root {

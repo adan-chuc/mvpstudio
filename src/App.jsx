@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import confetti from 'canvas-confetti'
 import { Sparkles } from './components/ui/sparkles'
-import { ChatWidget } from './components/ui/ai-chat-input'
+// import { ChatWidget } from './components/ui/ai-chat-input'
 import { ThemeToggle } from './components/ThemeToggle'
 import { Retool, Vercel, Remote, Arc, Raycast } from './components/logos'
+import { TestimonialsColumn } from './components/ui/testimonials-columns'
+import { DockNavigation } from './components/ui/dock-navigation'
+import { Timeline } from './components/ui/timeline'
 import { 
   CurrencyDollarIcon, 
   ClockIcon, 
@@ -213,6 +216,208 @@ function App() {
   }
 
   // Smooth spectacular confetti explosion from center
+  // Testimonials data
+  const testimonials = [
+    {
+      text: "MVP Studio nos ayudó a validar nuestra idea en solo 5 semanas. Ahorramos más de $150,000 comparado con otras propuestas.",
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      name: "Carlos Mendoza",
+      role: "CEO, TechStartup MX",
+    },
+    {
+      text: "La velocidad de desarrollo fue impresionante. Tuvimos nuestro MVP funcional en producción en un mes. Exactamente lo que necesitábamos.",
+      image: "https://randomuser.me/api/portraits/women/44.jpg",
+      name: "Ana García",
+      role: "Fundadora, EduTech",
+    },
+    {
+      text: "El proceso de pagos por entregables nos dio mucha confianza. Solo pagamos por lo que recibimos, sin sorpresas.",
+      image: "https://randomuser.me/api/portraits/men/18.jpg",
+      name: "Roberto Silva",
+      role: "CTO, FinanceApp",
+    },
+    {
+      text: "Gracias a nuestro MVP pudimos conseguir inversión. El código es limpio y escalable, justo lo que los inversionistas querían ver.",
+      image: "https://randomuser.me/api/portraits/women/68.jpg",
+      name: "María López",
+      role: "Co-founder, HealthTech",
+    },
+    {
+      text: "En 6 semanas pasamos de una idea a tener clientes pagando. MVP Studio entendió perfectamente nuestra visión.",
+      image: "https://randomuser.me/api/portraits/men/56.jpg",
+      name: "Jorge Ramírez",
+      role: "Product Manager, SaaS",
+    },
+    {
+      text: "La relación costo-beneficio es excelente. Invertimos una fracción de lo presupuestado y validamos el mercado rápidamente.",
+      image: "https://randomuser.me/api/portraits/women/32.jpg",
+      name: "Patricia Hernández",
+      role: "CEO, E-commerce",
+    },
+    {
+      text: "El soporte post-lanzamiento fue clave. Nos ayudaron a iterar basándonos en feedback real de usuarios.",
+      image: "https://randomuser.me/api/portraits/men/45.jpg",
+      name: "Luis Martínez",
+      role: "Founder, PropTech",
+    },
+    {
+      text: "Somos 100% dueños del código. Esto nos permitió escalar el equipo de desarrollo sin depender de terceros.",
+      image: "https://randomuser.me/api/portraits/women/25.jpg",
+      name: "Sofía Ruiz",
+      role: "CTO, MarketPlace",
+    },
+    {
+      text: "MVP Studio nos ahorró meses de desarrollo y cientos de miles de pesos. Altamente recomendado para startups.",
+      image: "https://randomuser.me/api/portraits/men/29.jpg",
+      name: "Andrés Vargas",
+      role: "Co-founder, LogiTech",
+    },
+  ];
+
+  const firstColumn = testimonials.slice(0, 3);
+  const secondColumn = testimonials.slice(3, 6);
+  const thirdColumn = testimonials.slice(6, 9);
+
+  // Success cases data for timeline
+  const successCases = [
+    {
+      title: "Chatgo",
+      content: (
+        <div>
+          <div className="mb-6">
+            <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-600 dark:text-blue-400 mb-6">Agente de IA para Restaurantes en WhatsApp</h4>
+          </div>
+          <p className="text-slate-700 dark:text-slate-300 text-sm md:text-base font-normal mb-6">
+            Desarrollamos un agente de IA que automatiza completamente los pedidos de restaurantes a través de WhatsApp. 
+            Los clientes pueden hacer pedidos naturalmente y el sistema procesa todo automáticamente.
+          </p>
+          <div className="mb-6">
+            <h5 className="font-semibold text-slate-800 dark:text-white mb-3">Resultados impresionantes:</h5>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-green-600 dark:text-green-400">+200</div>
+                <div className="text-sm text-green-700 dark:text-green-300">Restaurantes activos</div>
+              </div>
+              <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">$2M+</div>
+                <div className="text-sm text-blue-700 dark:text-blue-300">En pedidos procesados</div>
+              </div>
+              <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">40%</div>
+                <div className="text-sm text-purple-700 dark:text-purple-300">Aumento en ventas</div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-slate-200 dark:border-gray-700">
+              <div className="text-sm text-slate-600 dark:text-slate-400 mb-2">Chat de WhatsApp</div>
+              <div className="h-32 bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900 dark:to-green-800 rounded-lg flex items-center justify-center">
+                <span className="text-green-700 dark:text-green-300 font-medium">Demo del Chat</span>
+              </div>
+            </div>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-slate-200 dark:border-gray-700">
+              <div className="text-sm text-slate-600 dark:text-slate-400 mb-2">Dashboard de Restaurante</div>
+              <div className="h-32 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 rounded-lg flex items-center justify-center">
+                <span className="text-blue-700 dark:text-blue-300 font-medium">Panel de Control</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Mi Boda Planner",
+      content: (
+        <div>
+          <div className="mb-6">
+            <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold text-purple-600 dark:text-purple-400 mb-6">Plataforma Integral para Organizar Bodas</h4>
+          </div>
+          <p className="text-slate-700 dark:text-slate-300 text-sm md:text-base font-normal mb-6">
+            Creamos una plataforma completa que conecta novios con proveedores y organiza cada detalle de la boda. 
+            Desde checklist personalizados hasta gestión de presupuestos.
+          </p>
+          <div className="mb-6">
+            <h5 className="font-semibold text-slate-800 dark:text-white mb-3">Impacto alcanzado:</h5>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="bg-pink-50 dark:bg-pink-900/20 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-pink-600 dark:text-pink-400">+500</div>
+                <div className="text-sm text-pink-700 dark:text-pink-300">Bodas organizadas</div>
+              </div>
+              <div className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">95%</div>
+                <div className="text-sm text-purple-700 dark:text-purple-300">Satisfacción de novios</div>
+              </div>
+              <div className="bg-indigo-50 dark:bg-indigo-900/20 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">1000+</div>
+                <div className="text-sm text-indigo-700 dark:text-indigo-300">Proveedores registrados</div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-slate-200 dark:border-gray-700">
+              <div className="text-sm text-slate-600 dark:text-slate-400 mb-2">Dashboard para Novios</div>
+              <div className="h-32 bg-gradient-to-br from-pink-100 to-purple-200 dark:from-pink-900 dark:to-purple-800 rounded-lg flex items-center justify-center">
+                <span className="text-purple-700 dark:text-purple-300 font-medium">Panel de Planificación</span>
+              </div>
+            </div>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-slate-200 dark:border-gray-700">
+              <div className="text-sm text-slate-600 dark:text-slate-400 mb-2">Red de Proveedores</div>
+              <div className="h-32 bg-gradient-to-br from-indigo-100 to-pink-200 dark:from-indigo-900 dark:to-pink-800 rounded-lg flex items-center justify-center">
+                <span className="text-indigo-700 dark:text-indigo-300 font-medium">Marketplace</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Designable",
+      content: (
+        <div>
+          <div className="mb-6">
+            <h4 className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-6">IA para Optimización de Productividad</h4>
+          </div>
+          <p className="text-slate-700 dark:text-slate-300 text-sm md:text-base font-normal mb-6">
+            Desarrollamos una plataforma con IA que analiza patrones de trabajo y prioriza tareas automáticamente, 
+            ayudando a profesionales a ser más efectivos y enfocados.
+          </p>
+          <div className="mb-6">
+            <h5 className="font-semibold text-slate-800 dark:text-white mb-3">Resultados medibles:</h5>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">60%</div>
+                <div className="text-sm text-orange-700 dark:text-orange-300">Mejora en productividad</div>
+              </div>
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">1000+</div>
+                <div className="text-sm text-yellow-700 dark:text-yellow-300">Usuarios activos</div>
+              </div>
+              <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl">
+                <div className="text-2xl font-bold text-green-600 dark:text-green-400">3hrs</div>
+                <div className="text-sm text-green-700 dark:text-green-300">Tiempo ahorrado/día</div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-slate-200 dark:border-gray-700">
+              <div className="text-sm text-slate-600 dark:text-slate-400 mb-2">Dashboard de IA</div>
+              <div className="h-32 bg-gradient-to-br from-orange-100 to-yellow-200 dark:from-orange-900 dark:to-yellow-800 rounded-lg flex items-center justify-center">
+                <span className="text-orange-700 dark:text-orange-300 font-medium">Análisis Inteligente</span>
+              </div>
+            </div>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-slate-200 dark:border-gray-700">
+              <div className="text-sm text-slate-600 dark:text-slate-400 mb-2">Gestión de Tareas</div>
+              <div className="h-32 bg-gradient-to-br from-green-100 to-orange-200 dark:from-green-900 dark:to-orange-800 rounded-lg flex items-center justify-center">
+                <span className="text-green-700 dark:text-green-300 font-medium">Smart Tasks</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+  ];
+
+  // Smooth spectacular confetti explosion from center
   const fireConfetti = () => {
     const defaults = { 
       ticks: 60,  // Optimized for performance
@@ -262,7 +467,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen relative font-outfit overflow-hidden">
+    <div className="min-h-screen relative font-outfit">
       {/* Modern Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5"></div>
@@ -415,46 +620,28 @@ function App() {
       
       {/* Content */}
       <div className="relative z-10">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200/50 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center"
-            >
-              <RocketLaunchIcon className="h-8 w-8 text-blue-600 mr-2" />
-              <span className="text-xl font-semibold text-slate-800">MVP Studio</span>
-            </motion.div>
+      {/* Header with Dock Navigation */}
+      <header className="bg-gradient-to-b from-indigo-50/90 to-purple-50/80 dark:from-gray-900/90 dark:to-gray-950/90 backdrop-blur-lg border-b border-slate-200/30 dark:border-gray-700/30 sticky top-0 z-50">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            <div className="w-20"></div>
             
-            <div className="flex items-center space-x-8">
-              <motion.nav
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="hidden md:flex space-x-8"
-              >
-                <a href="#servicios" className="text-slate-600 hover:text-blue-600 transition-colors duration-200">Servicios</a>
-                <a href="#proceso" className="text-slate-600 hover:text-blue-600 transition-colors duration-200">Proceso</a>
-                <a href="#contacto" className="text-slate-600 hover:text-blue-600 transition-colors duration-200">Contacto</a>
-              </motion.nav>
-              
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.2 }}
-              >
-                <ThemeToggle />
-              </motion.div>
-            </div>
+            <DockNavigation className="flex" />
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              className="w-20 flex justify-end"
+            >
+              <ThemeToggle />
+            </motion.div>
           </div>
         </div>
       </header>
 
       {/* Hero and Trusted Companies Combined Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-indigo-50 via-purple-50/80 to-white dark:from-gray-900 dark:to-gray-950">
+      <section id="inicio" className="relative overflow-hidden bg-gradient-to-b from-indigo-50 via-purple-50/80 to-white dark:from-gray-900 dark:to-gray-950">
         {/* Unified background layers */}
         <div className="absolute inset-0">
           {/* Main radial gradient background */}
@@ -498,7 +685,7 @@ function App() {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 Construimos <strong>MVPs</strong> para empresas y emprendedores que quieren 
-                ahorrar dinero en un desarrollo caro y prefieren validar sin arriesgar capital
+                ahorrar dinero en un desarrollo caro y prefieren avanzar sin arriesgar capital
               </motion.p>
 
               <motion.div
@@ -567,7 +754,7 @@ function App() {
       </section>
 
       {/* Benefits Section with Perfect Symmetrical Gradient */}
-      <section className="relative pt-0 pb-8 px-4 sm:px-6 lg:px-8">
+      <section id="beneficios" className="relative pt-0 pb-8 px-4 sm:px-6 lg:px-8">
         {/* Perfect symmetrical vertical gradient: white → color → white */}
         <div 
           className="absolute inset-0" 
@@ -588,7 +775,7 @@ function App() {
               ¿Por qué elegir un MVP?
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Valida tu idea de negocio sin arriesgar todo tu capital
+              Construye tu idea de negocio sin arriesgar todo tu capital
             </p>
           </motion.div>
 
@@ -621,7 +808,7 @@ function App() {
       </section>
 
       {/* Working Benefits Section - Notion/Apple Style */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+      <section id="servicios" className="relative py-20 px-4 sm:px-6 lg:px-8">
         {/* Gradient that starts white, transitions to purple tones, then prepares for the fourth section */}
         <div 
           className="absolute inset-0" 
@@ -692,7 +879,7 @@ function App() {
       </section>
 
       {/* Features Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+      <section id="caracteristicas" className="relative py-20 px-4 sm:px-6 lg:px-8">
         {/* Gradient overlay to blend with previous section */}
         <div 
           className="absolute inset-0 bg-slate-50/50"
@@ -767,8 +954,77 @@ function App() {
         </div>
       </section>
 
+      {/* Success Cases Timeline Section */}
+      <section id="casos-exito" className="relative">
+        <Timeline data={successCases} />
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonios" className="relative py-20 px-4 sm:px-6 lg:px-8">
+        {/* Gradient background that transitions from previous section */}
+        <div 
+          className="absolute inset-0" 
+          style={{
+            background: 'linear-gradient(to bottom, rgba(248, 250, 252, 0.5) 0%, #f8fafc 10%, #f1f5f9 25%, #e8edf6 50%, #f1f5f9 75%, #f8fafc 90%, rgba(248, 250, 252, 0.3) 100%)'
+          }}
+        ></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center justify-center max-w-[540px] mx-auto"
+          >
+            <div className="flex justify-center">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="border border-slate-200/50 dark:border-gray-700/50 py-2 px-6 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm"
+              >
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-300">Testimonios</span>
+              </motion.div>
+            </div>
+
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="text-3xl sm:text-4xl font-bold text-slate-800 dark:text-white tracking-tight mt-5"
+            >
+              Lo que dicen nuestros clientes
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="text-center mt-5 text-slate-600 dark:text-slate-400 max-w-2xl"
+            >
+              Empresas y emprendedores que confiaron en nosotros para validar sus ideas
+            </motion.p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden"
+          >
+            <TestimonialsColumn testimonials={firstColumn} duration={15} />
+            <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
+            <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
+          </motion.div>
+        </div>
+      </section>
+
       {/* Contact Form Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50/30">
+      <section id="contacto" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50/30">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -778,7 +1034,7 @@ function App() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-4">
-              ¿Listo para validar tu idea?
+              ¿Listo para construir tu idea?
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
               Cuéntanos sobre tu proyecto y descubre cómo podemos ayudarte 
@@ -952,7 +1208,7 @@ function App() {
       </div>
 
       {/* Chat Widget */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.9 }}
         animate={{ 
           opacity: 1, 
@@ -966,7 +1222,7 @@ function App() {
           onSubmit={handleChatSubmit} 
           onSuggestionClick={handleSuggestionClick}
         />
-      </motion.div>
+      </motion.div> */}
 
       {/* Success Modal */}
       {showSuccessModal && (
